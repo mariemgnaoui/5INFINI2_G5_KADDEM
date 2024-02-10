@@ -36,6 +36,14 @@ pipeline {
                                }
 
                  }
+  stage('dockerhub') {
+                                             steps {
+
+                                        sh "docker login -u mariemgnaoui -p mariem2000"
+                                        sh "docker tag kaddemimage:v${BUILD_NUMBER} mariemgnaoui/MariemGNAOUI-5INFINI2-G5-kaddem:kaddemimage"
+                                        sh "docker push  mariemgnaoui/MariemGNAOUI-5INFINI2-G5-kaddem:kaddemimage"
+                                             }
+                       }
 
 
     }
