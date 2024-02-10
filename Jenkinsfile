@@ -12,6 +12,11 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
+        stage('SONARQUBE') {
+                             steps {
+                                    sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=ahmed2000'
+                                   }
+                             }
 
 
 
