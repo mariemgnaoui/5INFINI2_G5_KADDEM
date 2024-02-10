@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  achat-app:
+  kaddem-app:
     image: souhailamri/kaddem:1.0.0
     container_name: kaddem-app
     ports:
