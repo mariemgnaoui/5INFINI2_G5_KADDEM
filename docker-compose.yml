@@ -10,19 +10,18 @@ services:
       - SERVER_SERVLET_CONTEXT_PATH=/kaddem
       - SERVER_PORT=8089
       - SPRING_DATASOURCE_URL=jdbc:mysql://kaddem-db:3306/kaddem?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-      - SPRING_DATASOURCE_USERNAME=kaddemuser
-      - SPRING_DATASOURCE_PASSWORD=kaddempass
+      - SPRING_DATASOURCE_USERNAME= root
+      - SPRING_DATASOURCE_PASSWORD=
     depends_on:
       - kaddem-db
 
   kaddem-db:
-    image: mysql:latest
+    image: mysql:5.7
     container_name: kaddem-db
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: kaddem
-      MYSQL_USER: kaddemuser
-      MYSQL_PASSWORD: kaddempass
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
