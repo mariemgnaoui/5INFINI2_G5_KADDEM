@@ -45,7 +45,12 @@ pipeline {
                                              }
                        }
 
+ stage('run docker compose and kaddem project') {
+                                           steps {
 
+                                             sh 'docker compose up -d'
+                                                  }
+                                              }
     }
     post {
         success {
