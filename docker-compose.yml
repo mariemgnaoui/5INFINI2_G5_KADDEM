@@ -2,7 +2,7 @@ version: "3.7"  # Utilisation d'une version plus récente de Docker Compose
 
 services:
   Etudiantservice:
-    image: mariemgnaoui/mariemgnaoui-5infini2-g5-kaddem:kaddemimage  # Nom complet de l'image
+    image: ahmedaminechtiba/ahmedaminechtiba-5infini2-g5-kaddem:kaddemimage  # Nom complet de l'image
     restart: always
     depends_on:
       - mysql
