@@ -13,13 +13,13 @@ pipeline {
             }
         }
 
-stage('stage 3 sonarqube') {
-                steps {
-                       sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=chtiba'
-                      }
+//stage('stage 3 sonarqube') {
+  //              steps {
+    //                   sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=chtiba'
+      //                }
 
-         }
-         stage('Nexus') {
+        // }
+         stage('stage 4 nexus') {
                                  steps {
                                         sh 'mvn deploy -DskipTests=true'
                                              }
