@@ -13,12 +13,18 @@ pipeline {
             }
         }
 
-// stage('stage 3 sonarqube') {
-  //                steps {
-    //                       sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=mariem2000'
-      //                     }
-        // }
+stage('stage 3 sonarqube') {
+                steps {
+                       sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=chtiba'
+                      }
+
          }
+         stage('Nexus') {
+                                 steps {
+                                        sh 'mvn deploy -DskipTests=true'
+                                             }
+                                      }
+                                      }
     post {
         success {
             echo 'Build successfully'
