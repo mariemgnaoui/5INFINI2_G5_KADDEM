@@ -29,7 +29,24 @@ pipeline {
                                         sh 'mvn deploy -DskipTests=true'
                                              }
                                       }
-                                      }
+
+stage('stage 6 Docker images')
+                 {
+                      steps {
+                         sh 'docker build -t kaddemimage:v${BUILD_NUMBER} -f Dockerfile ./'
+                               }
+
+                 }
+                 stage('dockerhub') {
+                                                              steps {
+
+                                                         sh "docker login -u ahmedaminechtiba -p chtiba1998"
+                                                         sh "docker tag kaddemimage:v${BUILD_NUMBER} ahmedaminechtiba/ahmedaminechtiba-5infini2-g5-kaddem:kaddemimage"
+                                                         sh "docker push  ahmedaminechtiba/ahmedaminechtiba-5infini2-g5-kaddem:kaddemimage"
+                                                              }
+                                        }
+
+ }
 
     post {
         success {
