@@ -27,14 +27,12 @@ import tn.esprit.spring.kaddem.services.EtudiantServiceImpl;
 @ExtendWith(MockitoExtension.class)
 public class EtudiantServiceImpTest {
 
-    @Mock
-    private EtudiantRepository EtudianttRepository;
 
     @Mock
     private ContratRepository contratRepository;
 
     @Mock
-    private EtudiantRepository EtudiantRepository;
+    private EtudiantRepository etudiantRepository;
 
     @Mock
     private DepartementRepository departementRepository;
@@ -50,7 +48,7 @@ public class EtudiantServiceImpTest {
     @Test
     public void testRetrieveAllEtudiant() {
         List<Etudiant> Etudiants = new ArrayList<>();
-        when(EtudiantRepository.findAll()).thenReturn(Etudiants);
+        when(etudiantRepository.findAll()).thenReturn(Etudiants);
 
         List<Etudiant> result = EtudiantService.retrieveAllEtudiants();
 
@@ -61,7 +59,7 @@ public class EtudiantServiceImpTest {
     public void testAddEtudiant() {
         Etudiant Etudiant = new Etudiant();
 
-        when(EtudiantRepository.save(Etudiant)).thenReturn(Etudiant);
+        when(etudiantRepository.save(Etudiant)).thenReturn(Etudiant);
 
         assertEquals(Etudiant, EtudiantService.addEtudiant(Etudiant));
     }
@@ -80,7 +78,7 @@ public class EtudiantServiceImpTest {
         Etudiant.setNomE(nouveauNom);
 
         // Def comportement du repos lors maj
-        when(EtudiantRepository.save(Etudiant)).thenReturn(Etudiant);
+        when(etudiantRepository.save(Etudiant)).thenReturn(Etudiant);
 
         // Appeler la méthode de mise à jour du service
         Etudiant EtudiantMiseAJour = EtudiantService.updateEtudiant(Etudiant);
@@ -94,13 +92,13 @@ public class EtudiantServiceImpTest {
         Etudiant.setIdEtudiant(1);
 
         // Simuler la méthode findById pour retourner l'équipe
-        when(EtudiantRepository.findById(Etudiant.getIdEtudiant())).thenReturn(Optional.of(Etudiant));
+        when(etudiantRepository.findById(Etudiant.getIdEtudiant())).thenReturn(Optional.of(Etudiant));
 
         // Appeler la méthode de suppression du service
         EtudiantService.removeEtudiant(Etudiant.getIdEtudiant());
 
         // Vérifier que la méthode deleteById a été appelée avec le bon ID
-        verify(EtudiantRepository, times(1)).deleteById(Etudiant.getIdEtudiant());
+        verify(etudiantRepository, times(1)).deleteById(Etudiant.getIdEtudiant());
     }
 
 
