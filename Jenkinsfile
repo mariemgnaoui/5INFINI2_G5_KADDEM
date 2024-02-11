@@ -19,12 +19,18 @@ pipeline {
       //                }
 
         // }
-         stage('stage 4 nexus') {
+             stage('stage 4 JUNIT/MOCKITO') {
+                                              steps {
+                                                      sh 'mvn test'
+                                                    }
+                                                }
+         stage('stage 5 nexus') {
                                  steps {
                                         sh 'mvn deploy -DskipTests=true'
                                              }
                                       }
                                       }
+
     post {
         success {
             echo 'Build successfully'
