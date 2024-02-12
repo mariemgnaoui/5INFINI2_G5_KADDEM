@@ -28,21 +28,27 @@ pipeline {
                 sh 'mvn deploy -DskipTests=true'
             }
         }
-        stage('Docker')
-                 {
-                      steps {
+
+        stage('Docker') {
+            steps {
                 script {
                     // Build the Docker image with Jenkins BUILD_NUMBER as the version
                     sh 'docker build -t kaddemimage:v${BUILD_NUMBER} -f Dockerfile ./'
                     
+                    // Tagging the Docker image for Docker Hub
+                    sh 'docker tag kaddemimage:v${BUILD_NUMBER} moetezkhemissi/moetezkhemissi-5infini2-g5:v${BUILD_NUMBER}'
 
+                    // Login to Docker Hub (Ensure Docker Hub credentials are configured in Jenkins)
+                    // The 'dockerhubcredentials' should be the ID of your Docker Hub credentials stored in Jenkins
+                    sh 'docker login --username moetezkhemissi --password Moe.khe123123'
+                    
+                    // Push the Docker image to Docker Hub
+                    sh 'docker push moetezkhemissi/moetezkhemissi-5infini2-g5:v${BUILD_NUMBER}'
                     
                     // Run Docker Compose
                     sh "IMAGE_VERSION=v${BUILD_NUMBER} docker compose up -d"
                 }
             }
-                 }
+        }
     }
 }
-
-
