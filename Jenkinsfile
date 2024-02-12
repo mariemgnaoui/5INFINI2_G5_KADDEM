@@ -35,14 +35,14 @@ pipeline {
                     // Build the Docker image with Jenkins BUILD_NUMBER as the version
                     sh 'docker build -t kaddemimage:v${BUILD_NUMBER} -f Dockerfile ./'
                     
-                    // Set IMAGE_VERSION for Docker Compose
-                    sh "export IMAGE_VERSION=v${BUILD_NUMBER}"
+
                     
                     // Run Docker Compose
-                    sh 'docker compose up -d'
+                    sh "IMAGE_VERSION=v${BUILD_NUMBER} docker-compose up -d"
                 }
             }
                  }
     }
 }
+
 
