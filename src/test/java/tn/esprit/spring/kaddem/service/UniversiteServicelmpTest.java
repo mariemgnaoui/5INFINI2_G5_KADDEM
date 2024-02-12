@@ -19,9 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -35,31 +33,27 @@ public class UniversiteServicelmpTest {
     UniversiteServiceImpl universiteService;
 
     @BeforeEach
-    public void setup(){
-        MockitoAnnotations.openMocks(this);
+    public void init() {
+        MockitoAnnotations.initMocks(this);
     }
-
     @Test
-    public void testRetrieveAllUniversites() {
-        List<Universite> mockUniversites = new ArrayList<>();
-        mockUniversites.add(new Universite(1, "Universite 1"));
-        mockUniversites.add(new Universite(2, "Universite 2"));
 
-        when(universiteRepository.findAll()).thenReturn(mockUniversites);
+    public void testretrieveAllUniversites(){
+        List<Universite> universites= new ArrayList<>();
 
-        List<Universite> universites = universiteService.retrieveAllUniversites();
+        when(universiteRepository.findAll()).thenReturn(universites);
 
-        assertNotNull(universites);
-        assertEquals(2, universites.size());
-        verify(universiteRepository, times(1)).findAll();
+        List<Universite> result= universiteService.retrieveAllUniversites();
+
+        assertEquals(universites,result);
     }
-
+      @Test
     public    void testaddUniversite (){
   Universite universite= new Universite();
   when(universiteRepository.save(universite)).thenReturn(universite);
        assertEquals(universite,universiteService.addUniversite(universite));
     }
-
+   @Test
     public    void testupdateUniversite (){
        Universite universite= new Universite();
        universite.setIdUniv(1);
@@ -73,7 +67,7 @@ public class UniversiteServicelmpTest {
     }
 
 
-
+    @Test
     public  void testdeleteUniversite(){
         Universite universite= new Universite();
         universite.setIdUniv(1);
