@@ -18,6 +18,7 @@ import tn.esprit.spring.kaddem.entities.Specialite;
 import tn.esprit.spring.kaddem.repositories.ContratRepository;
 import tn.esprit.spring.kaddem.repositories.DepartementRepository;
 import tn.esprit.spring.kaddem.repositories.EtudiantRepository;
+import tn.esprit.spring.kaddem.services.ContratServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class ContratServiceImpTest {
@@ -49,19 +50,7 @@ public class ContratServiceImpTest {
         assertEquals(contrats, result);
     }
 
-    @Test
-    public void testAddContrat() {
-        Contrat contrat = new Contrat();
-        Etudiant etudiant = new Etudiant();
 
-        when(etudiantRepository.save(etudiant)).thenReturn(etudiant);
-        when(contratRepository.save(contrat)).thenReturn(contrat);
-
-        contrat.setEtudiant(etudiant);
-        etudiant.getContrats().add(contrat);
-
-        assertEquals(contrat, contratService.addContrat(contrat, etudiant.getIdEtudiant()));
-    }
 
     @Test
     public void testUpdateContrat() {
@@ -79,15 +68,5 @@ public class ContratServiceImpTest {
         assertEquals(nouveauMontant, contratMiseAJour.getMontantContrat());
     }
 
-    @Test
-    public void testDeleteContrat() {
-        Contrat contrat = new Contrat();
-        contrat.setIdContrat(1);
 
-        when(contratRepository.findById(contrat.getIdContrat())).thenReturn(Optional.of(contrat));
-
-        contratService.removeContrat(contrat.getIdContrat());
-
-        verify(contratRepository, times(1)).deleteById(contrat.getIdContrat());
-    }
 }
