@@ -39,7 +39,7 @@ pipeline {
                     sh "export IMAGE_VERSION=v${BUILD_NUMBER}"
                     
                     // Run Docker Compose
-                    sh 'docker-compose up -d'
+                    sh 'docker compose up -d'
                 }
             }
                  }
