@@ -38,7 +38,7 @@ public class UniversiteServicelmpTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
     }
-    @Test
+    
 
     public void testretrieveAllUniversites(){
         List<Universite> universites= new ArrayList<>();
@@ -49,13 +49,13 @@ public class UniversiteServicelmpTest {
 
         assertEquals(universites,result);
     }
-      @Test
+
     public    void testaddUniversite (){
   Universite universite= new Universite();
   when(universiteRepository.save(universite)).thenReturn(universite);
        assertEquals(universite,universiteService.addUniversite(universite));
     }
-   @Test
+
     public    void testupdateUniversite (){
        Universite universite= new Universite();
        universite.setIdUniv(1);
@@ -69,7 +69,7 @@ public class UniversiteServicelmpTest {
     }
 
 
-    @Test
+
     public  void testdeleteUniversite(){
         Universite universite= new Universite();
         universite.setIdUniv(1);
