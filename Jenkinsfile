@@ -7,18 +7,20 @@ pipeline {
                 echo 'Le code source a été récupéré.'
             }
         }
+             stage('Build avec Maven') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
            stage('Tests Mockito/Junit') {
                                               steps {
                                                       sh 'mvn test'
                                                     }
                                                 }
-        stage('Build avec Maven') {
-            steps {
-                sh 'mvn clean compile'
-            }
-        }
+   
+
           stage('Nexus') {
-                                 steps {
+                                 steps{
                                         sh 'mvn deploy -DskipTests=true'
                                              }
                                       }
