@@ -23,7 +23,7 @@ pipeline {
                     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test -Dsonar.host.url=http://192.168.2.30:9000 -Dsonar.login=sqa_90c006e6f0ef92d57190728a6a54f64bc8b0fa4d"
                 }
             }
-
+        }
         stage('Tests Mockito/Junit') {
             steps {
                 sh 'mvn test'
