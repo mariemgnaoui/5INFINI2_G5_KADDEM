@@ -1,33 +1,59 @@
 pipeline {
     agent any
     stages {
-        stage('GIT') {
+        stage('stage 1 github') {
             steps {
-                echo 'pulling ..'
-                git branch :'abderrahmen_benazzouz',
-                url : 'https://github.com/mariemgnaoui/5INFINI2_G5_KADDEM.git'
+                checkout scm
             }
         }
 
-        stage('MVN CLEAN') {
+        stage('stage 2 compiler') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean compile'
             }
         }
 
-         stage('MVN COMPILE') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
+//stage('stage 3 sonarqube') {
+  //              steps {
+    //                   sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=chtiba'
+      //                }
 
-          stage('MVN SONARQUBE') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar '
-            }
+        // }
+             stage('stage 4 JUNIT/MOCKITO') {
+                                              steps {
+                                                      sh 'mvn test'
+                                                    }
+                                                }
+         stage('stage 5 nexus') {
+                                 steps {
+                                        sh 'mvn deploy -DskipTests=true'
+                                             }
+                                      }
+
+stage('stage 6 Docker images')
+                 {
+                      steps {
+                         sh 'docker build -t kaddemimage:v${BUILD_NUMBER} -f Dockerfile ./'
+                               }
+
+                 }
+                 stage('dockerhub') {
+                                                              steps {
+
+                                                         sh "docker login -u azzouz99 -p azzouz1999"
+                                                         sh "docker tag kaddemimage:v${BUILD_NUMBER} azzouz99/azzouz99-5infini2-g5-kaddem:kaddemimage"
+                                                         sh "docker push  azzouz99/azzouz99-5infini2-g5-kaddem:kaddemimage"
+                                                              }
+                                        }
+
+ }
+
+    post {
+        success {
+            echo 'Build successfully'
+        }
+        failure {
+            echo 'failed '
         }
     }
-}
-
- 
-
+ }
