@@ -38,7 +38,7 @@ pipeline {
 
                     
                     // Run Docker Compose
-                    sh "IMAGE_VERSION=v${BUILD_NUMBER} docker-compose up -d"
+                    sh "IMAGE_VERSION=v${BUILD_NUMBER} docker compose up -d"
                 }
             }
                  }
