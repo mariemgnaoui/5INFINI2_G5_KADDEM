@@ -55,32 +55,49 @@ public class UniversiteServicelmpTest {
         verify(universiteRepository, times(1)).findAll();
     }
 
-    public    void testaddUniversite (){
-  Universite universite= new Universite();
-  when(universiteRepository.save(universite)).thenReturn(universite);
-       assertEquals(universite,universiteService.addUniversite(universite));
+    @Test
+    public void testAddUniversite() {
+        Universite universiteToAdd = new Universite("New Universite");
+        Universite savedUniversite = new Universite(1, "New Universite");
+
+        when(universiteRepository.save(any(Universite.class))).thenReturn(savedUniversite);
+
+        Universite result = universiteService.addUniversite(universiteToAdd);
+
+        assertNotNull(result);
+        assertEquals(savedUniversite.getIdUniv(), result.getIdUniv());
+        assertEquals(savedUniversite.getNomUniv(), result.getNomUniv());
+        verify(universiteRepository, times(1)).save(universiteToAdd);
     }
 
-    public    void testupdateUniversite (){
-       Universite universite= new Universite();
-       universite.setIdUniv(1);
-       universite.setNomUniv("test");
-       String newName="test2";
-       universite.setNomUniv(newName);
-       when(universiteRepository.save(universite)).thenReturn(universite);
-       Universite universiteUpdated = universiteService.updateUniversite(universite);
-       assertEquals(newName,universiteUpdated.getNomUniv());
+    @Test
+    public void testUpdateUniversite() {
+        Universite existingUniversite = new Universite(1, "Existing Universite");
+        Universite updatedUniversite = new Universite(1, "Updated Universite");
 
+        when(universiteRepository.save(any(Universite.class))).thenReturn(updatedUniversite);
+
+        Universite result = universiteService.updateUniversite(existingUniversite);
+
+        assertNotNull(result);
+        assertEquals(updatedUniversite.getIdUniv(), result.getIdUniv());
+        assertEquals(updatedUniversite.getNomUniv(), result.getNomUniv());
+        verify(universiteRepository, times(1)).save(existingUniversite);
     }
 
 
 
-    public  void testdeleteUniversite(){
-        Universite universite= new Universite();
-        universite.setIdUniv(1);
-        when(universiteRepository.findById(universite.getIdUniv())).thenReturn(Optional.of(universite));
-        universiteService.deleteUniversite(universite.getIdUniv());
-        verify(universiteRepository,times(1)).deleteById(universite.getIdUniv());
+    @Test
+    public void testDeleteUniversite() {
+        Integer universiteIdToDelete = 1;
+        Universite universiteToDelete = new Universite(1, "Universite To Delete");
+
+        when(universiteRepository.findById(universiteIdToDelete)).thenReturn(Optional.of(universiteToDelete));
+        doNothing().when(universiteRepository).delete(any(Universite.class));
+
+        universiteService.deleteUniversite(universiteIdToDelete);
+
+        verify(universiteRepository, times(1)).delete(universiteToDelete);
     }
 
 
