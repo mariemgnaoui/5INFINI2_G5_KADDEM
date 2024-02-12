@@ -16,7 +16,7 @@ pipeline {
         stage('SonarQube Analysis') {
 
 
-    sh 'mvn sonar:sonar -Dsonar.projectKey=test -Dsonar.projectName='test'"
+    sh "mvn sonar:sonar -Dsonar.projectKey=test -Dsonar.projectName='test'"
     
   }
     }
