@@ -17,6 +17,11 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
+          stage('Nexus') {
+                                 steps {
+                                        sh 'mvn deploy -DskipTests=true'
+                                             }
+                                      }
 
     
     }
