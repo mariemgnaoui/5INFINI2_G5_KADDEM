@@ -58,4 +58,26 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            mail to: 'khemissimoetez@gmail.com',
+                 subject: "SUCCESS: Pipeline ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "The pipeline ${env.JOB_NAME} #${env.BUILD_NUMBER} completed successfully."
+        }
+        failure {
+            mail to: 'khemissimoetez@gmail.com',
+                 subject: "FAILURE: Pipeline ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "The pipeline ${env.JOB_NAME} #${env.BUILD_NUMBER} failed."
+        }
+        unstable {
+            mail to: 'khemissimoetez@gmail.com',
+                 subject: "UNSTABLE: Pipeline ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "The pipeline ${env.JOB_NAME} #${env.BUILD_NUMBER} is unstable."
+        }
+        aborted {
+            mail to: 'khemissimoetez@gmail.com',
+                 subject: "ABORTED: Pipeline ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "The pipeline ${env.JOB_NAME} #${env.BUILD_NUMBER} was aborted."
+        }
+    }
 }
