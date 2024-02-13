@@ -1,5 +1,8 @@
 pipeline {
     agent any
+       tools {
+            maven 'M2_HOME'
+        }
     stages {
         stage('GIT') {
             steps {
@@ -13,7 +16,7 @@ pipeline {
             }
         }
 
-//stage('stage 3 sonarqube') {
+//stage('SonarQube') {
   //              steps {
     //                   sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
       //                }
