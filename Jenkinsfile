@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
 
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test -Dsonar.host.url=http://192.168.2.30:9000 -Dsonar.login=sqa_90c006e6f0ef92d57190728a6a54f64bc8b0fa4d"
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test -Dsonar.host.url=http://192.168.2.30:9000 -Dsonar.login=sqa_6206a3ea12660fc8defce6dba4a4e0fa0761fbd5"
                 }
             }
         }

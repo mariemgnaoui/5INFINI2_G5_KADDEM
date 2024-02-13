@@ -10,11 +10,13 @@
     </parent>
     <groupId>tn.esprit.spring</groupId>
     <artifactId>kaddem</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <name>kaddem</name>
     <description>kaddem</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
+            <maven.compiler.source>11</maven.compiler.source>
+            <maven.compiler.target>11</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
